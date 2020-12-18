@@ -24,13 +24,19 @@ end
 
 contents = CSV.open "event_attendees.csv", headers: true, header_converters: :symbol
 
+template_latter = File.read "form_letter.html"
+
 contents.each do |row|
   first_name = row[:first_name]
   zipcode = clean_zipcode(row[:zipcode])
   legislators = legislators_by_zipcode(zipcode)
+
+  personal_letter = template_latter.gsub("FIRST_NAME", first_name)
+  personal_letter.gsub!("LEGISLATORS", legislators)
+
+  puts personal_letter
   
-  puts "#{first_name}(#{zipcode}) : #{legislators}"
+  #puts "#{first_name}(#{zipcode}) : #{legislators}"
 end
 
 
-template_latter = File.read "form_letter.html"
