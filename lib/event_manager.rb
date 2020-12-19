@@ -12,7 +12,7 @@ def clean_phone_number(phone_number)
 
   if phone_number.length == 10
     phone_number
-  elsif phone_number == 11 && phone_number.match?(/1.../, 0)
+  elsif phone_number.length == 11 && phone_number.match?(/1.../, 0)
     phone_number.delete_prefix("1")
   else
     "Incorrect phone number"
@@ -55,12 +55,13 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   phone = row[:homephone]
   legislators = legislators_by_zipcode(zipcode)
+  clean_phone_number = clean_phone_number(phone)
 
   form_letter = erb_letter_template.result(binding)
 
   save_thank_you_letter(id, form_letter)
 
-  puts clean_phone_number(phone)
+  puts clean_phone_number
   #puts form_letter
   
   #puts "#{first_name}(#{zipcode}) : #{legislators}"
