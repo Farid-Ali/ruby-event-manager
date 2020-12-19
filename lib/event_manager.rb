@@ -55,13 +55,13 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   phone = row[:homephone]
   legislators = legislators_by_zipcode(zipcode)
-  clean_phone_number = clean_phone_number(phone)
+  phone_number = clean_phone_number(phone)
 
   form_letter = erb_letter_template.result(binding)
 
   save_thank_you_letter(id, form_letter)
 
-  puts clean_phone_number
+  #puts phone_number
   #puts form_letter
   
   #puts "#{first_name}(#{zipcode}) : #{legislators}"
