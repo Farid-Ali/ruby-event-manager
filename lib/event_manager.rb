@@ -64,6 +64,15 @@ def no_of_user_registered_in_a_specific_hour(registration_hours)
   end
 end
 
+#save the user matrics like when most user registered in a specific hour of a day and day of a week
+def save_user_matrics(user_matrics)
+  Dir.mkdir("output_admin") unless Dir.exist? "output_admin"
+
+  File.open("output_admin/user_matrics.html", "w") do |file|
+    file.puts user_matrics
+  end
+end
+
 
 contents = CSV.open "event_attendees.csv", headers: true, header_converters: :symbol
 
