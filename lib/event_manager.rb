@@ -70,7 +70,7 @@ def save_user_matrics(user_matrics)
 end
 
 
-def no_of_user_registered_in_a_specific_hour(registration_hours)
+def no_of_user_registered_in_a_specific_hour_and_day(registration_hours, registration_days)
   template_user_matrics = File.read "user_matrics.erb"
   template_user_matrics_erb_object = ERB.new template_user_matrics
 
@@ -111,4 +111,4 @@ contents.each do |row|
 end
 
 
-no_of_user_registered_in_a_specific_hour(registration_hours)
+no_of_user_registered_in_a_specific_hour_and_day(registration_hours, registration_days)

@@ -17,7 +17,24 @@
           <% registration_hours = registration_hours.select { |a| a != registration_hours.first } %>
         <% end %>
     <% else %>
-      <th></th>
+      <th>Hours of The Day When User Registered</th>
+      <td>No register found</td>
+    <% end %>
+  </table>
+
+  <table>
+    <% if registration_days.kind_of?(Array) %>
+      <th>Days of the Week When User Registered</th><th>No of User Registered</th>
+        <% while registration_days.length > 0 %>
+          <% registration_counter = registration_days.count(registration_days.first) %>
+        <tr>
+          <td><%=registration_days.first%></td>
+          <td><%=registration_counter%></td>
+        </tr>
+          <% registration_days = registration_days.select { |a| a != registration_days.first } %>
+        <% end %>
+    <% else %>
+      <th>Days of The Week When User Registered</th>
       <td>No register found</td>
     <% end %>
   </table>
