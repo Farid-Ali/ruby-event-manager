@@ -54,6 +54,12 @@ def hour_of_the_day_when_user_registered(registration_date_time)
   registration_hour = registration_date_time_object.hour
 end
 
+def day_of_the_week_when_user_registered(registration_date_time)
+  registration_date_time_object = DateTime.strptime(registration_date_time, "%m/%d/%y %H:%M")
+
+  registration_day = registration_date_time_object.day
+end
+
 #save the user matrics like when most user registered in a specific hour of a day and day of a week
 def save_user_matrics(user_matrics)
   Dir.mkdir("output_admin") unless Dir.exist? "output_admin"
@@ -80,8 +86,10 @@ contents = CSV.open "event_attendees.csv", headers: true, header_converters: :sy
 template_latter = File.read "form_letter.erb"
 template_latter_erb_object = ERB.new template_latter
 
-#Save the hour when user register in an Array
+#array for storing the hours in a day when user register
 registration_hours = Array.new
+#array for storing the days of the week when user register
+registration_days = Array.new
 
 contents.each do |row|
   id = row[0]
@@ -89,8 +97,11 @@ contents.each do |row|
   zipcode = clean_zipcode(row[:zipcode])
   phone = row[:homephone]
   
-  #insert registration_hour when user registered in registration_hours Array
+  #insert registration_hour in registration_hours array when user registered
   registration_hours << hour_of_the_day_when_user_registered(row[:regdate])
+  #insert registration_days in registraion_day array when user registered
+  registration_days << day_of_the_week_when_user_registered(row[:regdate])
+
   
   legislators = legislators_by_zipcode(zipcode)
   phone_number = clean_phone_number(phone)
