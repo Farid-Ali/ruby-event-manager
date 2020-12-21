@@ -1,0 +1,21 @@
+<html>
+<head>
+  <meta charset='utf-8'>
+  <title>User Matrics</title>
+</head>
+<body>
+  <h1>User Matrics</h1>
+  <table>
+    <% if registration_hours.kind_of?(Array) %>
+      <th>Hour of The Day When User Registered</th><th>No of User Registered</th>
+        <tr>
+          <td><%=registration_hours.first%></td>
+          <td><%=registration_counter%></td>
+        </tr>
+    <% else %>
+      <th></th>
+      <td>No register found</td>
+    <% end %>
+  </table>
+</body>
+</html>
