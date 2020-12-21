@@ -69,7 +69,10 @@ def save_user_matrics(user_matrics)
   end
 end
 
-
+#array for storing the hours in a day when user register
+registration_hours = Array.new
+#array for storing the days of the week when user register
+registration_days = Array.new
 def no_of_user_registered_in_a_specific_hour_and_day(registration_hours, registration_days)
   template_user_matrics = File.read "user_matrics.erb"
   template_user_matrics_erb_object = ERB.new template_user_matrics
@@ -85,11 +88,6 @@ contents = CSV.open "event_attendees.csv", headers: true, header_converters: :sy
 
 template_latter = File.read "form_letter.erb"
 template_latter_erb_object = ERB.new template_latter
-
-#array for storing the hours in a day when user register
-registration_hours = Array.new
-#array for storing the days of the week when user register
-registration_days = Array.new
 
 contents.each do |row|
   id = row[0]
