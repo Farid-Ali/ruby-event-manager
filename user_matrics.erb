@@ -8,11 +8,13 @@
   <table>
     <% if registration_hours.kind_of?(Array) %>
       <th>Hour of The Day When User Registered</th><th>No of User Registered</th>
-        <% registration_hours.each do |hour| %>
+        <% while registration_hours.length > 0 %>
+          <% registration_counter = registration_hours.count(registration_hours.first) %>
         <tr>
           <td><%=registration_hours.first%></td>
           <td><%=registration_counter%></td>
         </tr>
+          <% registration_hours = registration_hours.select { |a| a != registration_hours.first } %>
         <% end %>
     <% else %>
       <th></th>
