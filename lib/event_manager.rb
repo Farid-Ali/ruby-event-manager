@@ -69,11 +69,15 @@ def save_user_matrics(user_matrics)
   end
 end
 
+#array for storing user names
+user_names = Array.new
+#array for storing user phone numbers
+user_phone_numbers = Array.new
 #array for storing the hours in a day when user register
 registration_hours = Array.new
 #array for storing the days of the week when user register
 registration_days = Array.new
-def no_of_user_registered_in_a_specific_hour_and_day(registration_hours, registration_days)
+def no_of_user_registered_in_a_specific_hour_and_day_and_user_info(registration_hours, registration_days, user_names, user_phone_numbers)
   template_user_matrics = File.read "user_matrics.erb"
   template_user_matrics_erb_object = ERB.new template_user_matrics
 
@@ -94,19 +98,21 @@ contents.each do |row|
   first_name = row[:first_name]
   zipcode = clean_zipcode(row[:zipcode])
   phone = row[:homephone]
+  legislators = legislators_by_zipcode(zipcode)
+  phone_number = clean_phone_number(phone)
   
   #insert registration_hour in registration_hours array when user registered
   registration_hours << hour_of_the_day_when_user_registered(row[:regdate])
   #insert registration_days in registraion_day array when user registered
   registration_days << day_of_the_week_when_user_registered(row[:regdate])
-
-  
-  legislators = legislators_by_zipcode(zipcode)
-  phone_number = clean_phone_number(phone)
+  #insert first_name in user_names array
+  user_names << first_name
+  #insert phone_number in user_phone_numbers array
+  user_phone_numbers << phone_number
 
   form_letter = template_latter_erb_object.result(binding)
   save_thank_you_letter(id, form_letter)
 end
 
 
-no_of_user_registered_in_a_specific_hour_and_day(registration_hours, registration_days)
+no_of_user_registered_in_a_specific_hour_and_day_and_user_info(registration_hours, registration_days, user_names, user_phone_numbers)

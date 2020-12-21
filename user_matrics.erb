@@ -6,6 +6,23 @@
 <body>
   <h1>User Matrics</h1>
   <table>
+    <% if !user_names.empty? %>
+      <th>User Name</th><th>Phone Number</th>
+      <% user_phone_numbers_index = 0 %>
+        <% user_names.each do |name| %>
+        <tr>
+          <td><%=name%></td>
+          <td><%=user_phone_numbers[user_phone_numbers_index]%></td>
+        </tr>
+          <% user_phone_numbers_index += 1 %>
+        <% end %>
+    <% else %>
+      <th>About User</th>
+      <td>No register found</td>
+    <% end %>
+  </table>
+
+  <table>
     <% if registration_hours.kind_of?(Array) %>
       <th>Hour of The Day When User Registered</th><th>No of User Registered</th>
         <% while registration_hours.length > 0 %>
