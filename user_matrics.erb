@@ -8,10 +8,12 @@
   <table>
     <% if registration_hours.kind_of?(Array) %>
       <th>Hour of The Day When User Registered</th><th>No of User Registered</th>
+        <% registration_hours.each do |hour| %>
         <tr>
           <td><%=registration_hours.first%></td>
           <td><%=registration_counter%></td>
         </tr>
+        <% end %>
     <% else %>
       <th></th>
       <td>No register found</td>
